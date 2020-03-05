@@ -4,16 +4,23 @@ module.exports = function check(str, bracketsConfig) {
   let br =[];
   for (i = 0; i<bracketsConfig.length;i++){
     for ( j = 0; j<bracketsConfig[i].length;j++){
-      br.push(bracketsConfig[i][j]);
+        if (bracketsConfig[i][j] != "|") br.push(bracketsConfig[i][j]);
+      //br.push(bracketsConfig[i][j]);
     }
 }
-
+// for (i=0; i<br.length;i++){
+//         if (br[i]=="|") br=br.splice(i, 2);
+// }
   
    br = br.join('');
   // стек открытых скобок
   var st = [];
+ 
+  let qI = 0;
   // бежим по всей строке
   for (var i = 0; i < str.length; ++i) {
+      if (str[i]==" | ") qI+=1;
+      if (qI%2!=0) st.push("|")
       // текущий символ
       var ch = str[i];
       // ищем символ в скобках
@@ -75,12 +82,15 @@ function isBalanced(str) {
 
 console.log(isBalanced('||'));
 
-const config2 = [['(', ')'], ['[', ']']];
+const config2 = [['(', ')'], ['[', ']'], ['{', '}'], ['|', '|']];
 let br =[];
 for (i = 0; i<config2.length;i++){
     for ( j = 0; j<config2[i].length;j++){
-      br.push(config2[i][j]);
+        if (config2[i][j] != "|") br.push(config2[i][j]);
     }
 
 }
+// for (i=0; i<br.length;i++){
+//     if (br[i]=="|") br=br.splice(i, 2);
+// }
 console.log(br.join(''));
